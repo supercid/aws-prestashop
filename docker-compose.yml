@@ -1,0 +1,32 @@
+version: '3.3'
+
+services:
+  ################################################
+  ####          MariaDB Container          ######
+  ##############################################
+  db_ps:
+    image: mariadb:10.2
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: prestashop
+
+  ################################################
+  ####        Prestashop Container         ######
+  ##############################################
+  prestashop:
+    hostname: prestashop
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    links:
+      - db_ps
+    ports:
+      - 9999:9999
+    environment:
+      MYSQL_HOST: db_ps
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+      MYSQL_DATABASE: prestashop
+      VIRTUAL_HOST: localhost:9999
+      ADMIN_EMAIL: admin@admin.com
+      ADMIN_PASSWORD: Admin12345
