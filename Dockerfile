@@ -1,4 +1,4 @@
-FROM php:7.2-apache
+FROM public.ecr.aws/docker/library/php:7.2-apache-stretch
 
 MAINTAINER Cid Lopes "alannettto@gmail.com"
 
