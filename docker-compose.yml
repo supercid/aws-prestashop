@@ -6,6 +6,8 @@ services:
   ##############################################
   db_ps:
     image: mariadb:10.2
+    ports:
+      - 3307:3306
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: prestashop
