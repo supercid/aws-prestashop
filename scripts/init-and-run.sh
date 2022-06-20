@@ -1,12 +1,17 @@
 #!/bin/bash -x
 
-if [ ! -f /var/www/html/.installed ]; then
+until mysql -u"${MYSQL_USER}" -p"${MYSQL_PASSWORD}" -h"${MYSQL_HOST}"; do
+  >&2 echo "MySQL is unavailable - sleeping"
+  sleep 5
+done
+
+mysql -h"${MYSQL_HOST}" -u ${MYSQL_USER} -p${MYSQL_PASSWORD} \
+      -D ${MYSQL_DATABASE} \
+      -Bse 'SELECT id_configuration FROM ps_configuration WHERE name = "PS_SHOP_DOMAIN" AND value = "localhost:9999"'
   
-  until mysql -u"${MYSQL_USER}" -p"${MYSQL_PASSWORD}" -h"${MYSQL_HOST}"; do
-    >&2 echo "MySQL is unavailable - sleeping"
-    sleep 5
-  done
-  
+IS_INSTALLED=$(mysql -h"${MYSQL_HOST}" -u ${MYSQL_USER} -p${MYSQL_PASSWORD} -D ${MYSQL_DATABASE} -Bse 'SELECT id_configuration FROM ps_configuration WHERE name = "PS_SHOP_DOMAIN" AND value = "'${VIRTUAL_HOST}'"')
+
+if [ ! $IS_INSTALLED > 0 ]; then
   cd /var/www/html/install
 
   php index_cli.php \
@@ -42,7 +47,6 @@ if [ ! -f /var/www/html/.installed ]; then
 
   chown -R www-data:www-data /var/www/html/
 
-  touch .installed
 fi
 
 apache2-foreground
