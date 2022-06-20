@@ -1,2 +1,0 @@
-#!/bin/bash
-aws cloudformation deploy --template-file=deploy.template --stack-name="Root" --capabilities CAPABILITY_IAM --capabilities CAPABILITY_NAMED_IAM

@@ -1,2 +1,0 @@
-#!/bin/bash
-aws cloudformation package --template=root.template --s3-bucket=prestashop-cloudformation --output-template-file=deploy.template
