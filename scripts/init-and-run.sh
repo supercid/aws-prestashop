@@ -21,8 +21,8 @@ if [ ! "$IS_INSTALLED" > 0 ]; then
     --db_password="${MYSQL_PASSWORD}" \
     --email="${ADMIN_EMAIL}" \
     --password="${ADMIN_PASSWORD}" \
-    --db_create=0 \
-    --db_clear=0 \
+    --db_create="${DB_CREATE}" \
+    --db_clear="${DB_CLEAR}" \
     --newsletter=0 \
     --send_email=0
 
