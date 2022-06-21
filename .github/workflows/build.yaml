@@ -12,5 +12,9 @@ jobs:
         run: docker-compose build --no-cache
       - name: docker-compose up
         run: docker-compose --env-file .env.dev up -d
+      - name: wait for install
+        run: sleep 60 # Need to figure out how to check that
       - name: healthcheck
-        run: docker-compose exec prestashop curl --fail http://localhost:9999
+        run: docker-compose exec --no-TTY prestashop curl --fail http://localhost:9999
+      - name: teardown
+        run: docker-compose down -v --remove-orphans
