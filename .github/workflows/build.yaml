@@ -11,4 +11,4 @@ jobs:
       - name: docker-compose up
         run: docker-compose --env-file .env.dev up -d
       - name: healthcheck
-        run: curl --fail http://localhost:9999
+        run: docker-compose exec prestashop curl --fail http://localhost:9999
