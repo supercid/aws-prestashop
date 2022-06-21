@@ -1,8 +1,12 @@
 #!/bin/bash -x
 
+echo "moo"
 set -o allexport
 source ".env.$ENVIRONMENT_NAME"
 set +o allexport
+
+echo "doneit"
+export
 
 until mysql -u"${MYSQL_USER}" -p"${MYSQL_PASSWORD}" -h"${MYSQL_HOST}"; do
   >&2 echo "MySQL is unavailable - sleeping"
