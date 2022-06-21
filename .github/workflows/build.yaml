@@ -25,7 +25,8 @@ jobs:
 #      - name: List existing SQL databases
 #        run: mysql --user=root --password=root --execute="show databases;"
   build-prestashop:
-    runs-on: ubuntu-latest
+#    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - uses: actions/checkout@v2
 #      - name: Build Docker image
