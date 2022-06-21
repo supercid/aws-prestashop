@@ -3,35 +3,12 @@ name: Build and check
 on: [push]
 
 jobs:
-
-#  mysql:
-#    name: MySQL sidecar
-#    runs-on: ubuntu-latest
-#    steps:
-#      - name: Shutdown Default Ubuntu MySQL
-#        run: sudo service mysql stop
-#      - uses: mirromutth/mysql-action@v1.1
-#        with:
-#          host port: 3306 # Optional, default value is 3306. The port of host
-#          mysql version: '5.7' # Optional, default value is "latest". The version of the MySQL
-#          mysql database: 'prestashop' # Optional, default value is "test". The specified database which will be create
-#          mysql root password: 'root' # Required if "mysql user" is empty, default is empty. The root superuser password
-#          mysql user: 'prestashop' # Required if "mysql root password" is empty, default is empty. The superuser for the specified database. Can use secrets, too
-#          mysql password: 'root' # Required if "mysql user" exists. The password for the "mysql user"
-#      - name: Start MySQL
-#        run: sudo service mysql start
-#      - name: Verify MySQL
-#        run: mysql --user=root --password=root
-#      - name: List existing SQL databases
-#        run: mysql --user=root --password=root --execute="show databases;"
   build-prestashop:
 #    runs-on: ubuntu-latest
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@v2
-#      - name: Build Docker image
-#        run: docker build -t prestashop .
       - name: docker-compose up
-        run: docker-compose --env-file .env.dev up
+        run: docker-compose --env-file .env.dev up -d
       - name: healthcheck
         run: curl --fail http://localhost:9999

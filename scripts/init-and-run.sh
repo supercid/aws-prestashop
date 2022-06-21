@@ -49,4 +49,4 @@ if [ ! "$IS_INSTALLED" > 0 ]; then
 
 fi
 
-apache2-foreground&
+apache2-foreground
