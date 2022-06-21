@@ -8,6 +8,8 @@ jobs:
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@v2
+      - name: build
+        run: docker-compose build --no-cache
       - name: docker-compose up
         run: docker-compose --env-file .env.dev up -d
       - name: healthcheck
