@@ -5,6 +5,11 @@ services:
     image: mariadb:10.2
     ports:
       - "3307:3306"
+    healthcheck:
+      test: mysql -u"${MYSQL_USER}" -p"${MYSQL_PASSWORD}"
+      timeout: 5s
+      interval: 10s
+      retries: 10
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_DATABASE: ${MYSQL_DATABASE}

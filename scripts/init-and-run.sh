@@ -5,6 +5,11 @@ source ".env/env.$ENVIRONMENT_NAME"
 echo "doneitx"
 export
 
+until mysql -u"${MYSQL_USER}" -p"${MYSQL_PASSWORD}" -h"${MYSQL_HOST}"; do
+   >&2 echo "MySQL is unavailable - sleeping"
+   sleep 5
+done
+
 IS_INSTALLED=$(mysql -h"${MYSQL_HOST}" -u "${MYSQL_USER}" -p"${MYSQL_PASSWORD}" -D "${MYSQL_DATABASE}" -Bse 'SELECT id_configuration FROM ps_configuration WHERE name = "PS_SHOP_DOMAIN" AND value = "'"${VIRTUAL_HOST}"'"')
 
 # shellcheck disable=SC2071
