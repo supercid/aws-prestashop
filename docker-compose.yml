@@ -1,10 +1,15 @@
-version: '3.3'
+version: '3.9'
 
 services:
   db_ps:
     image: mariadb:10.2
     ports:
       - "3307:3306"
+    healthcheck:
+      test: mysql -u"${MYSQL_USER}" -p"${MYSQL_PASSWORD}"
+      timeout: 5s
+      interval: 10s
+      retries: 10
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_DATABASE: ${MYSQL_DATABASE}
@@ -12,10 +17,17 @@ services:
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
   prestashop:
     hostname: prestashop
+    healthcheck:
+      test: curl --fail http://localhost:9999 || exit 1
+      timeout: 5s
+      interval: 10s
+      retries: 10
     build:
       context: ./
       dockerfile: ./Dockerfile
     links:
+      - db_ps
+    depends_on:
       - db_ps
     ports:
       - "9999:9999"
@@ -27,3 +39,5 @@ services:
       VIRTUAL_HOST: ${VIRTUAL_HOST}
       ADMIN_EMAIL: ${ADMIN_EMAIL}
       ADMIN_PASSWORD: ${ADMIN_PASSWORD}
+      DB_CREATE: ${DB_CREATE}
+      DB_CLEAR: ${DB_CLEAR}
