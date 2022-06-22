@@ -1,5 +1,9 @@
 #!/bin/bash -x
 
+source ".env.$ENVIRONMENT_NAME"
+echo "doneitx"
+export
+
 until mysql -u"${MYSQL_USER}" -p"${MYSQL_PASSWORD}" -h"${MYSQL_HOST}"; do
   >&2 echo "MySQL is unavailable - sleeping"
   sleep 5
