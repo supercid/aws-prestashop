@@ -9,9 +9,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: build
-        run: docker-compose build --no-cache
+        run: docker-compose build
       - name: docker-compose up
-        run: docker-compose --env-file .env.dev up -d
+        run: docker-compose --env-file env/.env.dev up -d
       - name: wait for install
         run: sleep 60 # Need to figure out how to check that
       - name: healthcheck
