@@ -4,5 +4,5 @@
 
 Start the containers with
 ```bash
-docker-compose --env-file .env.dev up
+docker-compose --env-file env/.env.dev up
 ```
