@@ -12,6 +12,11 @@ services:
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
   prestashop:
     hostname: prestashop
+    healthcheck:
+      test: curl --fail http://localhost:9999 || exit 1
+      timeout: 5s
+      interval: 10s
+      retries: 10
     build:
       context: ./
       dockerfile: ./Dockerfile
@@ -29,3 +34,5 @@ services:
       VIRTUAL_HOST: ${VIRTUAL_HOST}
       ADMIN_EMAIL: ${ADMIN_EMAIL}
       ADMIN_PASSWORD: ${ADMIN_PASSWORD}
+      DB_CREATE: ${DB_CREATE}
+      DB_CLEAR: ${DB_CLEAR}
