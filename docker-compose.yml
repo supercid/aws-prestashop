@@ -1,4 +1,4 @@
-version: '3.3'
+version: '3.9'
 
 services:
   db_ps:
@@ -12,10 +12,17 @@ services:
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
   prestashop:
     hostname: prestashop
+    healthcheck:
+      test: [ "CMD", "mysql", "-h", "${MYSQL_HOST}", "-u", "${MYSQL_USER}", "-p", "${MYSQL_PASSWORD}", "-D", "${MYSQL_DATABASE}", "-Bse", 'SELECT id_configuration FROM ps_configuration WHERE name = "PS_SHOP_DOMAIN" AND value = "'"${VIRTUAL_HOST}"'"']
+      timeout: 5s
+      interval: 10s
+      retries: 10
     build:
       context: ./
       dockerfile: ./Dockerfile
     links:
+      - db_ps
+    depends_on:
       - db_ps
     ports:
       - "9999:9999"
