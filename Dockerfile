@@ -48,6 +48,10 @@ RUN cd / && wget https://github.com/PrestaShop/PrestaShop/releases/download/${PR
     rm -rf /${PRESTASHOP_ARCHIVE}.zip \
     rm -rf /var/www/html/wrap
 
+COPY .env.staging /var/www/html/.env.staging
+COPY .env.prod /var/www/html/.env.prod
+COPY .env.dev /var/www/html/.env.dev
+
 ADD scripts/init-and-run.sh /usr/local/bin/init-and-run
 EXPOSE 9999
 CMD ["init-and-run"]
