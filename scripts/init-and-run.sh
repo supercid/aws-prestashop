@@ -1,7 +1,7 @@
 #!/bin/bash -x
 
-cd /var/www/html/ || exit
-source ".env.$ENVIRONMENT_NAME"
+cd /var/www/html || exit
+source ".env/env.$ENVIRONMENT_NAME"
 echo "doneitx"
 export
 
