@@ -42,7 +42,9 @@ if [ ! "$IS_INSTALLED" > 0 ]; then
   bin/console doctrine:query:sql 'UPDATE ps_configuration SET value = 2 WHERE name = "PS_MAIL_METHOD"'
 
   chown -R www-data:www-data /var/www/html/
-
+else
+  rm -rf install
 fi
+
 
 apache2-foreground
