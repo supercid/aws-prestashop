@@ -43,13 +43,23 @@ if [ ! "$IS_INSTALLED" > 0 ]; then
 
   cp -r config config_aws
   cp -r app app_aws
+  cp -r img img_aws
+  cp -r modules modules_aws
+  cp -r cache cache_aws
+  cp -r theme theme_aws
+  cp -r override override_aws
 
   chown -R www-data:www-data /var/www/html/
 else
-  rm -rf install
+  rm -rf install config app
+fi
   cp -r config_aws config
   cp -r app_aws app
-fi
+  cp -r img_aws img
+  cp -r modules_aws modules
+  cp -r cache_aws cache
+  cp -r theme_aws theme
+  cp -r override_aws override
 
 
 apache2-foreground
