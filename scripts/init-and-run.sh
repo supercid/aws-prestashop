@@ -2,7 +2,6 @@
 
 cd /var/www/html || exit
 source "env/.env.$ENVIRONMENT_NAME"
-echo "doneitx"
 export
 
 IS_INSTALLED=$(mysql -h"${MYSQL_HOST}" -u "${MYSQL_USER}" -p"${MYSQL_PASSWORD}" -D "${MYSQL_DATABASE}" -Bse 'SELECT id_configuration FROM ps_configuration WHERE name = "PS_SHOP_DOMAIN" AND value = "'"${VIRTUAL_HOST}"'"')
@@ -26,6 +25,7 @@ if [ ! "$IS_INSTALLED" > 0 ]; then
     --newsletter=0 \
     --send_email=0
 
+  cp -r config config_BAK
   cd /var/www/html/ && rm -rf install && mv admin adminn0st0
 
   mysql -h"${MYSQL_HOST}" -u "${MYSQL_USER}" -p"${MYSQL_PASSWORD}" \
@@ -40,6 +40,9 @@ if [ ! "$IS_INSTALLED" > 0 ]; then
   bin/console prestashop:module install nostotagging
 
   bin/console doctrine:query:sql 'UPDATE ps_configuration SET value = 2 WHERE name = "PS_MAIL_METHOD"'
+
+  cp -r config config_aws
+  cp -r app app_aws
 
   chown -R www-data:www-data /var/www/html/
 else
