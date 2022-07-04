@@ -51,7 +51,7 @@ if [ ! "$IS_INSTALLED" > 0 ]; then
 
   chown -R www-data:www-data /var/www/html/
 else
-  rm -rf install config app
+  rm -rf install
 fi
   cp -r config_aws config
   cp -r app_aws app
