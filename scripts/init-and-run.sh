@@ -50,16 +50,14 @@ if [ ! "$IS_INSTALLED" > 0 ]; then
   cp -r override override_aws
 
   chown -R www-data:www-data /var/www/html/
-else
-  rm -rf install
 fi
-  cp -r config_aws config
-  cp -r app_aws app
-  cp -r img_aws img
-  cp -r modules_aws modules
-  cp -r cache_aws cache
-  cp -r theme_aws theme
-  cp -r override_aws override
-
+cp -r config_aws config
+cp -r app_aws app
+cp -r img_aws img
+cp -r modules_aws modules
+cp -r cache_aws cache
+cp -r theme_aws theme
+cp -r override_aws override
+rm -rf config app img modules cache theme override install
 
 apache2-foreground
