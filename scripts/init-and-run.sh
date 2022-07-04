@@ -49,7 +49,7 @@ if [ ! "$IS_INSTALLED" > 0 ]; then
   cp -r theme theme_aws
   cp -r override override_aws
 
-  chown -R www-data:www-data /var/www/html/
+  # chown -R www-data:www-data /var/www/html/
 fi
 cp -r config_aws config
 cp -r app_aws app
@@ -59,5 +59,5 @@ cp -r cache_aws cache
 cp -r theme_aws theme
 cp -r override_aws override
 rm -rf config app img modules cache theme override install
-
+chown -R www-data:www-data /var/www/html/
 apache2-foreground
