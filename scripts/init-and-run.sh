@@ -41,22 +41,6 @@ if [ ! "$IS_INSTALLED" > 0 ]; then
 
   bin/console doctrine:query:sql 'UPDATE ps_configuration SET value = 2 WHERE name = "PS_MAIL_METHOD"'
 
-  cp -r config config_aws
-  cp -r app app_aws
-  cp -r img img_aws
-  cp -r modules modules_aws
-  cp -r cache cache_aws
-  cp -r theme theme_aws
-  cp -r override override_aws
-
+  chown -R www-data:www-data /var/www/html/
 fi
-cp -r config_aws config
-cp -r app_aws app
-cp -r img_aws img
-cp -r modules_aws modules
-cp -r cache_aws cache
-cp -r theme_aws theme
-cp -r override_aws override
-rm -rf config app img modules cache theme override install
-chown -R www-data:www-data /var/www/html/
 apache2-foreground
