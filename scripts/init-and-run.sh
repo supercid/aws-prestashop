@@ -1,7 +1,6 @@
 #!/bin/bash -x
 
 cd /var/www/html || exit
-rm -rf config app img modules cache theme override install
 source "env/.env.$ENVIRONMENT_NAME"
 export
 
