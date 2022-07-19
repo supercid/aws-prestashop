@@ -49,7 +49,6 @@ if [ ! "$IS_INSTALLED" > 0 ]; then
   cp -r theme theme_aws
   cp -r override override_aws
 
-  # chown -R www-data:www-data /var/www/html/
 fi
 cp -r config_aws config
 cp -r app_aws app
