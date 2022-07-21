@@ -25,7 +25,6 @@ if [ ! "$IS_INSTALLED" > 0 ]; then
     --newsletter=0 \
     --send_email=0
 
-  cp -r config config_BAK
   cd /var/www/html/ && rm -rf install && mv admin adminn0st0
 
   mysql -h"${MYSQL_HOST}" -u "${MYSQL_USER}" -p"${MYSQL_PASSWORD}" \
