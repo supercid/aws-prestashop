@@ -41,5 +41,20 @@ if [ ! "$IS_INSTALLED" > 0 ]; then
   bin/console doctrine:query:sql 'UPDATE ps_configuration SET value = 2 WHERE name = "PS_MAIL_METHOD"'
 
   chown -R www-data:www-data /var/www/html/
+  cp -r img/*.* /mnt/img
+  cp -r modules/*.* /mnt/modules
+  cp -r cache/*.* /mnt/cache
+  cp -r theme/*.* /mnt/theme
+  cp -r app/*.* /mnt/app
+  cp -r override/*.* /mnt/override
+  cp -r config/*.* /mnt/config
 fi
+ln -s img /mnt/img
+ln -s modules /mnt/modules
+ln -s cache /mnt/cache
+ln -s theme /mnt/theme
+ln -s app /mnt/app
+ln -s override /mnt/override
+ln -s config /mnt/config
+
 apache2-foreground
