@@ -25,6 +25,28 @@ services:
     build:
       context: ./
       dockerfile: ./Dockerfile
+    volumes:
+      - type: bind
+        source: ./mnt/img
+        target: /mnt/img
+      - type: bind
+        source: ./mnt/modules
+        target: /mnt/modules
+      - type: bind
+        source: ./mnt/cache
+        target: /mnt/cache
+      - type: bind
+        source: ./mnt/theme
+        target: /mnt/theme
+      - type: bind
+        source: ./mnt/app
+        target: /mnt/app
+      - type: bind
+        source: ./mnt/override
+        target: /mnt/override
+      - type: bind
+        source: ./mnt/config
+        target: /mnt/config
     links:
       - db_ps
     depends_on:
