@@ -40,34 +40,8 @@ if [ ! "$IS_INSTALLED" > 0 ]; then
   bin/console prestashop:module install nostotagging
 
   bin/console doctrine:query:sql 'UPDATE ps_configuration SET value = 2 WHERE name = "PS_MAIL_METHOD"'
-
-  # clean-up EFS
-  rm -rf /mnt/img/*.*
-  rm -rf /mnt/modules/*.*
-  rm -rf /mnt/cache/*.*
-  rm -rf /mnt/theme/*.*
-  rm -rf /mnt/app/*.*
-  rm -rf /mnt/override/*.*
-  rm -rf /mnt/config/*.*
-
-  cp -r img/* /mnt/img
-  cp -r modules/* /mnt/modules
-  cp -r cache/* /mnt/cache
-  cp -r theme/* /mnt/theme
-  cp -r app/* /mnt/app
-  cp -r override/* /mnt/override
-  cp -r config/* /mnt/config
+  chown -R www-data:www-data /var/www/html/
 fi
-rm -rf img modules cache theme app override config
 
-cp -r /mnt/img . #img
-cp -r /mnt/modules . #modules
-cp -r /mnt/cache . #cache
-cp -r /mnt/theme . #theme
-cp -r /mnt/app . #app
-cp -r /mnt/override . #override
-cp -r /mnt/config . #config
-
-chown -R www-data:www-data /var/www/html/
 
 apache2-foreground

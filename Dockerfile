@@ -9,8 +9,8 @@ ENV LC_ALL en_US.UTF-8
 ENV PRESTASHOP_VERSION 1.7.6.7
 ENV PRESTASHOP_ARCHIVE prestashop_${PRESTASHOP_VERSION}
 
-RUN sed -i "s/Listen 80/Listen 9999/" /etc/apache2/ports.conf
-RUN sed -i "s/Listen 443/Listen 9999/" /etc/apache2/ports.conf
+#RUN sed -i "s/Listen 80/Listen 9999/" /etc/apache2/ports.conf
+#RUN sed -i "s/Listen 443/Listen 9999/" /etc/apache2/ports.conf
 
 RUN apt-get update && \
     apt-get -y -qq install apt-transport-https locales jq zip unzip wget \
@@ -51,5 +51,6 @@ RUN cd / && wget https://github.com/PrestaShop/PrestaShop/releases/download/${PR
 COPY env /var/www/html/env
 
 ADD scripts/init-and-run.sh /usr/local/bin/init-and-run
-EXPOSE 9999
+#EXPOSE 9999
+EXPOSE 80
 CMD ["init-and-run"]
