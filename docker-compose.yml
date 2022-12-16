@@ -25,34 +25,34 @@ services:
     build:
       context: ./
       dockerfile: ./Dockerfile
-    volumes:
-      - type: bind
-        source: ./mnt/img
-        target: /mnt/img
-      - type: bind
-        source: ./mnt/modules
-        target: /mnt/modules
-      - type: bind
-        source: ./mnt/cache
-        target: /mnt/cache
-      - type: bind
-        source: ./mnt/theme
-        target: /mnt/theme
-      - type: bind
-        source: ./mnt/app
-        target: /mnt/app
-      - type: bind
-        source: ./mnt/override
-        target: /mnt/override
-      - type: bind
-        source: ./mnt/config
-        target: /mnt/config
+    # volumes:
+    #   - type: bind
+    #     source: ./mnt/img
+    #     target: /mnt/img
+    #   - type: bind
+    #     source: ./mnt/modules
+    #     target: /mnt/modules
+    #   - type: bind
+    #     source: ./mnt/cache
+    #     target: /mnt/cache
+    #   - type: bind
+    #     source: ./mnt/theme
+    #     target: /mnt/theme
+    #   - type: bind
+    #     source: ./mnt/app
+    #     target: /mnt/app
+    #   - type: bind
+    #     source: ./mnt/override
+    #     target: /mnt/override
+    #   - type: bind
+    #     source: ./mnt/config
+    #     target: /mnt/config
     links:
       - db_ps
     depends_on:
       - db_ps
     ports:
-      - "9999:9999"
+      - "9999:80"
     environment:
       MYSQL_HOST: ${MYSQL_HOST}
       MYSQL_USER: ${MYSQL_USER}
